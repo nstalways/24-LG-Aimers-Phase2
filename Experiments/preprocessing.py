@@ -86,4 +86,39 @@ def split_train_and_validation(tr_data: pd.DataFrame, val_size: float = 0.2, see
     return (x_tr, y_tr, x_val, y_val)
 
 
+def delete_features(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
+                    features: list = ['com_reg_ver_win_rate', 'customer_type', 'customer_country.1',
+                                      'historical_existing_cnt', 'id_strategic_ver',
+                                      'it_strategic_ver', 'idit_strategic_ver','product_subcategory',
+                                      'product_modelname', 'expected_timeline', 'ver_win_rate_x',
+                                      'ver_win_ratio_per_bu', 'business_area','business_subarea']) -> tuple:
+    """
+    주어진 데이터에서 features 에 속하는 feature column 들을 삭제한 뒤 반환합니다.
+
+    Args:
+        tr_data (pd.DataFrame): training data 입니다.
+        tt_data (pd.DataFrame): test data 입니다.
+        features (list, optional): 삭제할 feature list 입니다. 
+        기본값은 결측치 비율이 50 % 이상인 feature 들 + 중복 feature 입니다.
+
+    Returns:
+        tuple: features 를 제거한 (tr_data, tt_data) 를 반환합니다.
+    """
+    
+    tr_data = tr_data.drop(columns=features, axis=1)
+    tt_data = tt_data.drop(columns=features, axis=1)
+
+    return (tr_data, tt_data)
+
+
+def normalize_country_name(series: pd.Series):
+    def normalize(country_info):
+        if type(country_info) == float:
+            return country_info
+
+        return country_info.split('/')[-1]
+    
+    return series.apply(normalize)
+
+
 # TODO: 결측치 처리 함수 구현하기
