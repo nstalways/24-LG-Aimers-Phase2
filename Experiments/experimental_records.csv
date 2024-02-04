@@ -1,0 +1,5 @@
+date,model_name,test_f1_score,description
+2024-02-04/19:23:09,decision_tree,0.4754558204768583,모든 feature 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. Recall > Precision.
+2024-02-04/19:39:40,decision_tree,0.3950995405819296,절반 정도의 feature만 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. Recall > Precision. 이전 실험 대비 validation f1 score 감소
+2024-02-04/21:41:42,decision_tree,0.4242424242424242,customer_country.1 feature 삭제. customer_country feature 정규화. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. 실험 01 대비 validation f1 score 감소
+2024-02-04/22:26:01,decision_tree,0.3262032085561497,GridSearchCV 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. 실험 01 대비 validation f1 score 감소
