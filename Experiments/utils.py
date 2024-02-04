@@ -89,5 +89,26 @@ def get_clf_eval(y_test: np.ndarray, y_pred: np.ndarray = None):
     print("F1: {:.4f}".format(f1))
 
 
-
 # TODO: 실험 setting과 evaluation score 들을 dataframe 형태로 누적해주는 함수 구현하기
+def record_experimental_results(model_name: str,
+                                test_f1_score: str,
+                                description: str) -> None:
+
+    path = "./experimental_records.csv"
+
+    # 새로운 기록 생성
+    new_record = pd.DataFrame({
+        'date': [datetime.now().strftime("%Y-%m-%d/%H:%M:%S")],
+        'model_name': [model_name], 
+        'test_f1_score': [test_f1_score],
+        'description': [description]})
+    
+    # 기존 기록이 있는지 확인
+    if os.path.exists(path):
+        df = pd.read_csv(path)
+        df = df._append(new_record, ignore_index=True)
+
+    else:
+        df = new_record
+
+    df.to_csv(path, index=False)
