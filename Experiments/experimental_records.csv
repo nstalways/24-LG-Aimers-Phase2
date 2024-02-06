@@ -3,3 +3,11 @@ date,model_name,test_f1_score,description
 2024-02-04/19:39:40,decision_tree,0.3950995405819296,절반 정도의 feature만 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. Recall > Precision. 이전 실험 대비 validation f1 score 감소
 2024-02-04/21:41:42,decision_tree,0.4242424242424242,customer_country.1 feature 삭제. customer_country feature 정규화. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. 실험 01 대비 validation f1 score 감소
 2024-02-04/22:26:01,decision_tree,0.3262032085561497,GridSearchCV 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. 실험 01 대비 validation f1 score 감소
+2024-02-05/17:56:50,decision_tree_w_oversampling,0.3918918918918919,모든 feature 사용/전처리 X/RandomOverSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 108898
+2024-02-05/22:53:27,decision_tree_w_undersampling,0.5867215645908389,모든 feature 사용/전처리 X/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760
+2024-02-06/00:00:20,ensemble_decisiontree_w_undersampling,0.652854977261243,10개 decision tree 사용/seed33~42/mean validation f1 score 0.89055/hard voting/결측치 0으로 처리
+2024-02-06/11:45:07,ensemble_decisiontree_w_undersampling,0.6497337156902908,20개 decision tree 사용/seed33~52/mean validation f1 score 0.89215/hard voting/결측치 0으로 처리
+2024-02-06/14:51:02,decision_tree_w_undersampling_delete_feature,0.6105695228322217,"""customer_country.1"" feature 삭제/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760"
+2024-02-06/15:02:31,decision_tree_w_undersampling_delete_features,0.5814323607427057,"결측치 비율이 80% 이상인 feature 및 ""customer_country.1"" feature 삭제/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760"
+2024-02-06/15:12:31,decision_tree_w_undersampling_feature_normalization,0.5541035023523261,"""customer_country"" 정규화/""customer_country.1"" feature 삭제/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760"
+2024-02-06/15:20:02,ensemble_decisiontree_w_undersampling_and_delete_feature,0.6381883685023161,"10개 decision tree 사용/""customer_country.1"" feature 삭제/seed33~52/mean validation f1 score 0.89007/hard voting/결측치 0으로 처리"
