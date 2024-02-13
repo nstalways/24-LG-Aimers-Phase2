@@ -24,3 +24,8 @@ date,model_name,test_f1_score,description
 2024-02-12/01:14:02,ensemble_decisiontree_w_undersampling_ccp_delFeature,0.7031170158405723,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/ccp_alpha 0.0004 사용/""customer_country.1"" feature 삭제/mean validation f1 score 0.89571/hard voting/결측치 0으로 처리/"
 2024-02-12/01:55:22,ensemble_decisiontree_w_undersampling_bestccpAlpha_delFeature,0.6965020576131687,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/모델마다 best ccp alpha 찾아서 적용/""customer_country.1"" feature 삭제/mean validation f1 score 0.90029/hard voting/결측치 0으로 처리/"
 2024-02-12/11:45:10,ensemble_decisiontree_w_undersampling_bestccpAlpha,0.6965020576131687,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/모델마다 best ccp alpha 찾아서 적용/mean validation f1 score 0.90029/hard voting/결측치 0으로 처리/"
+2024-02-13/23:27:34,randomForest_params01,0.7045092838196286,모든 feature 사용/전처리 X/RandomForestClassifier 사용/결측치는 0으로 채움/Seed 33/ensemble_decisiontree_w_undersampling_and_ccp 실험과 유사하게 param setting/
+2024-02-13/23:43:00,randomForest_params02,0.7172774869109947,randomForest_params01 실험에서 n_estimators를 100으로 증가
+2024-02-13/23:47:35,randomForest_params03,0.6288056206088994,"randomForest_params02 실험에서 max_features를 ""sqrt""로 변경"
+2024-02-13/23:52:17,randomForest_params04,0.7104446742502586,randomForest_params02 실험에서 ccp_alpha 값을 0.00005 만큼 높임
+2024-02-13/23:54:57,randomForest_params05,0.7178936055883933,randomForest_params02 실험에서 ccp_alpha 값을 0.00005 만큼 감소
