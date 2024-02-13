@@ -33,8 +33,9 @@ def set_seed(seed: int = 2024) -> None:
 
 
 # TODO: 아카이빙용 네이밍 규칙 변경될 수 있음
-def make_submission(dir_name: str, f1_val: float, 
-                    y_pred: np.ndarray, sub_path: str = "./Data/submission.csv") -> None:
+def make_submission(dir_name: str, y_pred: np.ndarray,
+                    f1_val: float = None, model_name: str = None, 
+                    sub_path: str = "./Data/submission.csv") -> None:
     """제출용 csv 파일을 생성하는 함수입니다.
 
     제출용 csv 파일은 항상 submission.csv 라는 이름으로 생성되며,
@@ -42,8 +43,9 @@ def make_submission(dir_name: str, f1_val: float,
 
     Args:
         dir_name (str): 아카이빙할 디렉토리의 이름입니다.
-        f1_val (float): validation data에 대한 f1 score입니다.
         y_pred (np.ndarray): test data에 대한 예측 값입니다.
+        f1_val (float): validation data에 대한 f1 score입니다. Defaults to None
+        model_name (str): csv 파일 이름을 생성할 때 사용할 모델의 이름입니다. Defaults to None
         sub_path (str, optional): test data의 경로입니다. Defaults to "./Data/submission.csv".
     """
     
@@ -59,7 +61,14 @@ def make_submission(dir_name: str, f1_val: float,
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
 
-    csv_name = datetime.now().strftime("%Y%m%d") + "_0_" + str(f1_val)[2:] + ".csv"
+    csv_name = datetime.now().strftime("%Y%m%d")
+
+    if f1_val: csv_name += ("_0_" + str(f1_val)[2:])
+    else: csv_name += "_none"
+
+    if model_name: csv_name += ("_" + model_name + ".csv")
+    else: csv_name += ".csv"
+
     df_sub.to_csv(os.path.join(dir_path, csv_name), index=False)
 
 
