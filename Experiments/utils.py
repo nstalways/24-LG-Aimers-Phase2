@@ -7,6 +7,9 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
+# torch
+import torch
+
 # evaluation metrics
 from sklearn.metrics import (
     accuracy_score,
@@ -30,6 +33,11 @@ def set_seed(seed: int = 2024) -> None:
     random.seed(seed)
     os.environ['PYTHONASHSEED'] = str(seed)
     np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 
 # TODO: 아카이빙용 네이밍 규칙 변경될 수 있음
