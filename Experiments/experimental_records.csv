@@ -29,3 +29,9 @@ date,model_name,test_f1_score,description
 2024-02-13/23:47:35,randomForest_params03,0.6288056206088994,"randomForest_params02 실험에서 max_features를 ""sqrt""로 변경"
 2024-02-13/23:52:17,randomForest_params04,0.7104446742502586,randomForest_params02 실험에서 ccp_alpha 값을 0.00005 만큼 높임
 2024-02-13/23:54:57,randomForest_params05,0.7178936055883933,randomForest_params02 실험에서 ccp_alpha 값을 0.00005 만큼 감소
+2024-02-17/18:30:43,params01_adaboost_10,0.5892063492063493,"params01 세팅의 adaboost를, undersampling을 통해 만든 서로 다른 10개의 subset에 대해 학습시킨 뒤, 최종 앙상블"
+2024-02-17/19:39:30,params01_adaboost_20,0.6070087609511889,"params01 세팅의 adaboost를, undersampling을 통해 만든 서로 다른 20개의 subset에 대해 학습시킨 뒤, 최종 앙상블"
+2024-02-18/22:04:47,randomForest_params05_cityAndCountry,0.6471251409244645,randomForest_params05 실험 + customer_country feature를 city와 country로 분리
+2024-02-21/14:45:37,randomForest_params05_delFeatures,0.6725248974809607,"randomForest_params05 세팅 + is_converted가 True인 데이터와 False인 데이터 간에 분포 차이가 많이 나지 않는 features를 모두 삭제하고, 7개만 사용"
+2024-02-21/14:52:03,randomForest_params06,0.6694166175604007,randomForest_params05_delFeatrues 세팅에서 ccp_alpha 값을 0.001 감소
+2024-02-21/22:52:54,randomForest_params05_logTransform,0.7178936055883933,randomForest_params05 실험에서 lead_desc_length feature에 log transformation 적용
