@@ -81,7 +81,7 @@ def make_submission(dir_name: str, y_pred: np.ndarray,
 
 
 # TODO: 수정이 들어갈 수도 있음
-def get_clf_eval(y_test: np.ndarray, y_pred: np.ndarray = None):
+def get_clf_eval(y_test: np.ndarray, y_pred: np.ndarray = None, is_return: bool = False):
     """classifier 평가 결과를 출력하는 함수입니다.
 
     Args:
@@ -104,6 +104,9 @@ def get_clf_eval(y_test: np.ndarray, y_pred: np.ndarray = None):
     print("정밀도: {:.4f}".format(precision))
     print("재현율: {:.4f}".format(recall))
     print("F1: {:.4f}".format(f1))
+
+    if is_return:
+        return precision, recall, f1
 
 
 # TODO: 실험 setting과 evaluation score 들을 dataframe 형태로 누적해주는 함수 구현하기
