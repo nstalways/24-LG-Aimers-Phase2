@@ -35,3 +35,10 @@ date,model_name,test_f1_score,description
 2024-02-21/14:45:37,randomForest_params05_delFeatures,0.6725248974809607,"randomForest_params05 세팅 + is_converted가 True인 데이터와 False인 데이터 간에 분포 차이가 많이 나지 않는 features를 모두 삭제하고, 7개만 사용"
 2024-02-21/14:52:03,randomForest_params06,0.6694166175604007,randomForest_params05_delFeatrues 세팅에서 ccp_alpha 값을 0.001 감소
 2024-02-21/22:52:54,randomForest_params05_logTransform,0.7178936055883933,randomForest_params05 실험에서 lead_desc_length feature에 log transformation 적용
+2024-02-22/23:14:07,hparams01_gbm_20,0.7048260381593714,random_state를 제외한 hparams을 default 값으로 사용한 gbm 20개를 학습시킨 뒤 ensemble
+2024-02-22/23:20:44,hparams02_gbm_20,0.6986754966887417,hparams01에서 ccp_alpha를 0.0004로 변경한 뒤 gbm 20개를 학습시키고 ensemble
+2024-02-22/23:34:11,hparams01_gbm_20_noSplit,0.7100392596747055,"Data split을 하지 않은 상태에서, hparams01 세팅으로 gbm 20개를 학습시키고 ensemble"
+2024-02-22/23:45:26,hparams01_gbm_100_noSplit,0.7043040804918949,"Data split을 하지 않은 상태에서, hparams01 세팅으로 gbm 100개를 학습시키고 ensemble"
+2024-02-23/00:25:20,hparams03_gbm_20_incMaxDepth,0.7265668330560177,"hparams01 세팅에서 max_depth를 6으로 증가시킨 뒤에, gbm 20개를 학습시키고 ensemble"
+2024-02-23/13:12:49,hparams04_gbm_20_inc_estimators,0.7309192200557103,"hparams03 세팅에서 n_estimators를 200으로 증가시킨 뒤에, gbm 20개를 학습시키고 ensemble"
+2024-02-23/13:58:11,hparams05_gbm_30_inc_estimators,0.7377680043980209,"hparams04 세팅에서 n_estimators를 400으로 증가시킨 뒤에, gbm 30개를 학습시키고 ensemble"
