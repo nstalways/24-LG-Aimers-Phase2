@@ -42,3 +42,6 @@ date,model_name,test_f1_score,description
 2024-02-23/00:25:20,hparams03_gbm_20_incMaxDepth,0.7265668330560177,"hparams01 세팅에서 max_depth를 6으로 증가시킨 뒤에, gbm 20개를 학습시키고 ensemble"
 2024-02-23/13:12:49,hparams04_gbm_20_inc_estimators,0.7309192200557103,"hparams03 세팅에서 n_estimators를 200으로 증가시킨 뒤에, gbm 20개를 학습시키고 ensemble"
 2024-02-23/13:58:11,hparams05_gbm_30_inc_estimators,0.7377680043980209,"hparams04 세팅에서 n_estimators를 400으로 증가시킨 뒤에, gbm 30개를 학습시키고 ensemble"
+2024-02-23/23:27:54,baseline_xgb,0.6789976133651552,xgboost baseline
+2024-02-23/23:34:51,baseline_xgb_decEta,0.6844741235392321,xgboost baseline에서 eta를 0.05로 줄임
+2024-02-24/00:12:24,hparams05_gbm_30_inc_estimators_dropDuplicates,0.7433920704845814,"hparams05 세팅 + 중복 데이터 (negative 3000개, positive 200개) 삭제"
