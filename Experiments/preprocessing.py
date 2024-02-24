@@ -1,3 +1,6 @@
+# built-in library
+import re
+
 # basic library
 import numpy as np
 import pandas as pd
@@ -113,14 +116,48 @@ def delete_features(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
     return (tr_data, tt_data)
 
 
-def normalize_country_name(series: pd.Series):
-    def normalize(country_info):
-        if type(country_info) == float:
-            return country_info
+# TODO: 예외처리가 추가될 수 있음
+def normalize_country_name(tr_data: pd.DataFrame, tt_data: pd.DataFrame) -> tuple:
+    """customer_country feature로부터 국가명을 추출하여
+    주어진 dataframe의 country라는 새로운 feature에 할당하는 함수입니다.
 
-        return country_info.split('/')[-1]
-    
-    return series.apply(normalize)
+    Args:
+        tr_data (pd.DataFrame): training data 입니다.
+        tt_data (pd.DataFrame): test data 입니다.
+
+    Returns:
+        tuple:
+            customer_country, customer_country.1 feature는 삭제되고
+            country features는 추가된 (tr_data, tt_data) 를 반환합니다.
+    """
+    for df in [tr_data, tt_data]:
+        nan_val = df[df.isna()].loc[0][0] # 결측값 가져오기
+
+        countries = [] # 추출한 국가명을 저장할 배열
+        for name in df['customer_country']:
+            flag = False
+            try:
+                name = name.lower()
+                res = name.split("/")
+                if re.search("@", res[-1]) or re.search("[0-9]", res[-1]): # 비정상 데이터 예외처리
+                    flag = True
+                
+                else:
+                    countries.append(res[-1].strip())
+
+            except AttributeError: # nan value 예외처리
+                flag = True
+
+            if flag:
+                countries.append(nan_val)
+
+        df['country'] = countries
+        df.sort_index(axis=1, inplace=True)
+
+    # correlation이 높은 customer_country, customer_country.1 feature 삭제
+    tr_data, tt_data = delete_features(tr_data, tt_data, features=['customer_country', 'customer_country.1'])
+
+    return (tr_data, tt_data)
 
 
 # TODO: 결측치 처리 함수 구현하기
