@@ -20,6 +20,8 @@ def load_data(tr_path: str = "./Data/train.csv",
     """
     
     tr_data = pd.read_csv(tr_path)
+    tr_data.drop_duplicates(inplace=True)
+
     tt_data = pd.read_csv(tt_path)
 
     return (tr_data, tt_data)
