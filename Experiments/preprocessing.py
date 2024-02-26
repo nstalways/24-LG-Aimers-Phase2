@@ -1,5 +1,6 @@
 # built-in library
 import re
+from typing import List
 
 # basic library
 import numpy as np
@@ -23,14 +24,13 @@ def load_data(tr_path: str = "./Data/train.csv",
     """
     
     tr_data = pd.read_csv(tr_path)
-    tr_data.drop_duplicates(inplace=True)
+    tr_data.drop_duplicates(inplace=True) # 중복 제거
 
     tt_data = pd.read_csv(tt_path)
 
     return (tr_data, tt_data)
 
 
-# TODO: 원본 baseline 코드와 label encoding 방식을 다르게 했더니 test 성능 차이가 꽤나 많이 남 (혹시 몰라 기록해둠)
 def label_encoding(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
                    features: list = ["customer_country", "business_subarea",
                                      "business_area", "business_unit", "customer_type",
@@ -92,19 +92,14 @@ def split_train_and_validation(tr_data: pd.DataFrame, val_size: float = 0.2, see
 
 
 def delete_features(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
-                    features: list = ['com_reg_ver_win_rate', 'customer_type', 'customer_country.1',
-                                      'historical_existing_cnt', 'id_strategic_ver',
-                                      'it_strategic_ver', 'idit_strategic_ver','product_subcategory',
-                                      'product_modelname', 'expected_timeline', 'ver_win_rate_x',
-                                      'ver_win_ratio_per_bu', 'business_area','business_subarea']) -> tuple:
+                    features: list = ['id_strategic_ver', 'it_strategic_ver', 'product_modelname', 'ver_cus', 'ver_pro']) -> tuple:
     """
     주어진 데이터에서 features 에 속하는 feature column 들을 삭제한 뒤 반환합니다.
 
     Args:
         tr_data (pd.DataFrame): training data 입니다.
         tt_data (pd.DataFrame): test data 입니다.
-        features (list, optional): 삭제할 feature list 입니다. 
-        기본값은 결측치 비율이 50 % 이상인 feature 들 + 중복 feature 입니다.
+        features (list, optional): 삭제할 feature list 입니다. Correlation이 높거나 general한 정보를 담고있지 않다고 판단한 features를 기본적으로 삭제합니다.
 
     Returns:
         tuple: features 를 제거한 (tr_data, tt_data) 를 반환합니다.
@@ -116,8 +111,7 @@ def delete_features(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
     return (tr_data, tt_data)
 
 
-# TODO: 예외처리가 추가될 수 있음
-def normalize_country_name(tr_data: pd.DataFrame, tt_data: pd.DataFrame) -> tuple:
+def extract_country_name(tr_data: pd.DataFrame, tt_data: pd.DataFrame) -> tuple:
     """customer_country feature로부터 국가명을 추출하여
     주어진 dataframe의 country라는 새로운 feature에 할당하는 함수입니다.
 
@@ -160,4 +154,48 @@ def normalize_country_name(tr_data: pd.DataFrame, tt_data: pd.DataFrame) -> tupl
     return (tr_data, tt_data)
 
 
-# TODO: 결측치 처리 함수 구현하기
+def regroup(tr_data: pd.DataFrame, tt_data: pd.DataFrame, 
+            feature_name: str, regroup_info: List[List], use_default: bool = False) -> tuple:
+    """regroup_info를 바탕으로 data[feature_name]의 값들을 regroup합니다.
+
+    Args:
+        tr_data (pd.DataFrame): training data입니다.
+        tt_data (pd.DataFrame): test data입니다.
+        feature_name (str): regroup을 적용할 feature의 이름입니다.
+        regroup_info (List[List]): regroup 정보입니다. 각각의 리스트는 하나의 새로운 그룹을 의미합니다.
+        use_default (bool, optional): 
+            regroup 과정에서 regroup_info에 포함되지 않은 값이 등장한 경우, 원래의 값을 사용할지 선택하는 변수입니다. 
+            True이면 원래의 값을 추가하고, False이면 "Etc"로 처리합니다. Defaults to False.
+
+    Returns:
+        tuple: regroup을 마친 tr_data, tt_data를 반환합니다.
+    """
+    # 데이터를 연결
+    data = pd.concat([tr_data, tt_data])
+
+    # regroup_info를 바탕으로 regroup 수행
+    regroup_results = []
+    for val in data[feature_name].values:
+        if type(val) == float: # 결측치
+            regroup_results.append(val)
+            continue
+        
+        flag = True
+        for group_pool in regroup_info:
+            if val in group_pool:
+                regroup_results.append(group_pool[0])
+                flag = False
+                break
+        
+        if flag:
+            if use_default:
+                regroup_results.append(val)
+                continue
+            
+            regroup_results.append('Etc')
+
+    # 데이터 분리
+    data[feature_name] = regroup_results
+    tr_data, tt_data = data.iloc[:len(tr_data)], data.iloc[len(tr_data):]
+
+    return tr_data, tt_data
