@@ -155,7 +155,8 @@ def extract_country_name(tr_data: pd.DataFrame, tt_data: pd.DataFrame) -> tuple:
 
 
 def regroup(tr_data: pd.DataFrame, tt_data: pd.DataFrame, 
-            feature_name: str, regroup_info: List[List], use_default: bool = False) -> tuple:
+            feature_name: str, regroup_info: List[List],
+            except_val: str='others', except_thr: int = 0) -> tuple:
     """regroup_info를 바탕으로 data[feature_name]의 값들을 regroup합니다.
 
     Args:
@@ -163,15 +164,17 @@ def regroup(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
         tt_data (pd.DataFrame): test data입니다.
         feature_name (str): regroup을 적용할 feature의 이름입니다.
         regroup_info (List[List]): regroup 정보입니다. 각각의 리스트는 하나의 새로운 그룹을 의미합니다.
-        use_default (bool, optional): 
-            regroup 과정에서 regroup_info에 포함되지 않은 값이 등장한 경우, 원래의 값을 사용할지 선택하는 변수입니다. 
-            True이면 원래의 값을 추가하고, False이면 "Etc"로 처리합니다. Defaults to False.
+        except_val (str): except_thr 이하만큼 등장하는 값을 처리할 때 사용할 값입니다.
+        except_thr (int): 최소 등장 횟수입니다.
 
     Returns:
         tuple: regroup을 마친 tr_data, tt_data를 반환합니다.
     """
     # 데이터를 연결
     data = pd.concat([tr_data, tt_data])
+
+    # value별 등장 횟수 사전 생성
+    freq = data[feature_name].value_counts().to_dict()
 
     # regroup_info를 바탕으로 regroup 수행
     regroup_results = []
@@ -183,19 +186,18 @@ def regroup(tr_data: pd.DataFrame, tt_data: pd.DataFrame,
         flag = True
         for group_pool in regroup_info:
             if val in group_pool:
-                regroup_results.append(group_pool[0])
+                regroup_results.append(group_pool[0].lower())
                 flag = False
                 break
         
         if flag:
-            if use_default:
+            if freq[val] <= except_thr:
+                regroup_results.append(except_val.lower())
+            else:
                 regroup_results.append(val)
-                continue
-            
-            regroup_results.append('Etc')
 
     # 데이터 분리
     data[feature_name] = regroup_results
-    tr_data, tt_data = data.iloc[:len(tr_data)], data.iloc[len(tr_data):]
+    tr_data, tt_data = data.iloc[:len(tr_data)].drop(['id'], axis=1), data.iloc[len(tr_data):]
 
     return tr_data, tt_data
