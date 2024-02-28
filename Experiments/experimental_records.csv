@@ -45,3 +45,15 @@ date,model_name,test_f1_score,description
 2024-02-23/23:27:54,baseline_xgb,0.6789976133651552,xgboost baseline
 2024-02-23/23:34:51,baseline_xgb_decEta,0.6844741235392321,xgboost baseline에서 eta를 0.05로 줄임
 2024-02-24/00:12:24,hparams05_gbm_30_inc_estimators_dropDuplicates,0.7433920704845814,"hparams05 세팅 + 중복 데이터 (negative 3000개, positive 200개) 삭제"
+2024-02-24/21:05:02,hparams05_gbm_30_feCustomerCountry,0.7418463239358761,hparams05 세팅 + 중복 데이터 삭제 + customer_country feature 정규화 및 customer_country.1 feature 삭제
+2024-02-24/21:16:17,hparams05_gbm_30_delFeature,0.743421052631579,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제
+2024-02-24/21:36:19,hparams05_gbm_30_delFeature_feCustomerCountry,0.7512301804264626,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출
+2024-02-24/23:23:58,hparams05_gbm_30_binning,0.7546549835706462,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning
+2024-02-25/15:45:37,hparams05_gbm_30_regroupCustomerType,0.7532467532467532,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning + customer_type regroup
+2024-02-25/16:03:46,hparams05_gbm_30_logTransformation,0.7546549835706462,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning + historical_existing_cnt log transformation
+2024-02-25/16:25:47,hparams05_gbm_30_del2Features,0.7581699346405228,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1/id_strategic_ver/it_strategic_ver feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning
+2024-02-25/17:30:39,hparams05_gbm_30_incBinSize,0.7565502183406114,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1/id_strategic_ver/it_strategic_ver feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx bin size를 1000으로 설정
+2024-02-26/00:42:11,hparams05_gbm_30_fe01,0.7546346782988005,feature engineering 01 + hparams05 세팅 + gbm 30개 앙상블
+2024-02-26/01:27:22,hparams05_gbm_30_fe02,0.7585831062670301,feature engineering 01 + bin size 500으로 증가 + regrouping + hparams05 세팅 + gbm 30개 앙상블
+2024-02-26/11:20:07,hparams05_gbm_30_fe02,0.7585831062670301,feature engineering 01 + bin size 500으로 증가 + regrouping + hparams05 세팅 + gbm 30개 앙상블
+2024-02-26/16:25:00,hparams05_gbm_30_final,0.755676,feature engineering + 30개 gbm ensemble
