@@ -1,0 +1,59 @@
+date,model_name,test_f1_score,description
+2024-02-04/19:23:09,decision_tree,0.4754558204768583,모든 feature 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. Recall > Precision.
+2024-02-04/19:39:40,decision_tree,0.3950995405819296,절반 정도의 feature만 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. Recall > Precision. 이전 실험 대비 validation f1 score 감소
+2024-02-04/21:41:42,decision_tree,0.4242424242424242,customer_country.1 feature 삭제. customer_country feature 정규화. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. 실험 01 대비 validation f1 score 감소
+2024-02-04/22:26:01,decision_tree,0.3262032085561497,GridSearchCV 사용. Label encoding 외 다른 전처리 X. 결측치는 0으로 채움. 시드 33 사용. 실험 01 대비 validation f1 score 감소
+2024-02-05/17:56:50,decision_tree_w_oversampling,0.3918918918918919,모든 feature 사용/전처리 X/RandomOverSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 108898
+2024-02-05/22:53:27,decision_tree_w_undersampling,0.5867215645908389,모든 feature 사용/전처리 X/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760
+2024-02-06/00:00:20,ensemble_decisiontree_w_undersampling,0.652854977261243,10개 decision tree 사용/seed33~42/mean validation f1 score 0.89055/hard voting/결측치 0으로 처리
+2024-02-06/11:45:07,ensemble_decisiontree_w_undersampling,0.6497337156902908,20개 decision tree 사용/seed33~52/mean validation f1 score 0.89215/hard voting/결측치 0으로 처리
+2024-02-06/14:51:02,decision_tree_w_undersampling_delete_feature,0.6105695228322217,"""customer_country.1"" feature 삭제/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760"
+2024-02-06/15:02:31,decision_tree_w_undersampling_delete_features,0.5814323607427057,"결측치 비율이 80% 이상인 feature 및 ""customer_country.1"" feature 삭제/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760"
+2024-02-06/15:12:31,decision_tree_w_undersampling_feature_normalization,0.5541035023523261,"""customer_country"" 정규화/""customer_country.1"" feature 삭제/RandomUnderSampler 적용/결측치는 0으로 채움/Seed 33/training data size: 7760"
+2024-02-06/15:20:02,ensemble_decisiontree_w_undersampling_and_delete_feature,0.6381883685023161,"10개 decision tree 사용/""customer_country.1"" feature 삭제/seed33~52/mean validation f1 score 0.89007/hard voting/결측치 0으로 처리"
+2024-02-07/18:22:53,ensemble_decisiontree_w_undersampling_and_seed,0.6516966067864272,"10개 decision tree 사용, decision tree마다 seed 세팅/seed33~52/mean validation f1 score 0.88982/hard voting/결측치 0으로 처리/"
+2024-02-07/18:27:07,ensemble_decisiontree_w_undersampling_and_ccp,0.6913339824732229,"10개 decision tree 사용, decision tree마다 seed 세팅/seed33~52/ccp_alpha 0.00045 사용/mean validation f1 score 0.89745/hard voting/결측치 0으로 처리/"
+2024-02-08/16:18:57,ensemble_decisiontree_w_undersampling_ccp_delFeature,0.6957373836354729,"10개 decision tree 사용, decision tree마다 seed 세팅/seed33~52/ccp_alpha 0.0004 사용/""customer_country.1"" feature 삭제/mean validation f1 score 0.89659/hard voting/결측치 0으로 처리/"
+2024-02-11/16:22:37,ensemble_decisiontree_w_undersampling_ccp_delFeatures,0.6913339824732229,"10개 decision tree 사용, decision tree마다 seed 세팅/seed33~52/ccp_alpha 0.00045 사용/""customer_country.1, id_strategic_ver, it_strategic_ver, idit_strategic_ver"" feature 삭제/mean validation f1 score 0.89745/hard voting/결측치 0으로 처리/"
+2024-02-11/16:29:16,ensemble_decisiontree_w_undersampling_ccp_delFeatures,0.693579766536965,"10개 decision tree 사용, decision tree마다 seed 세팅/seed33~52/ccp_alpha 0.00046 사용/""customer_country.1, id_strategic_ver, it_strategic_ver, idit_strategic_ver"" feature 삭제/mean validation f1 score 0.89734/hard voting/결측치 0으로 처리/"
+2024-02-11/18:13:58,ensemble_decisiontree_w_undersampling,0.6233905579399142,5개 decision tree 사용/seed33~37/mean validation f1 score 0.89006/hard voting/결측치 0으로 처리
+2024-02-11/18:17:33,ensemble_decisiontree_w_undersampling,0.59255079006772,10개 decision tree 사용/seed33~42/mean validation f1 score 0.88982/hard voting/결측치 0으로 처리
+2024-02-11/18:20:36,ensemble_decisiontree_w_undersampling,0.6655499720826353,20개 decision tree 사용/seed33~52/mean validation f1 score 0.89073/hard voting/결측치 0으로 처리
+2024-02-12/00:02:37,ensemble_decisiontree_w_undersampling,0.6696230598669624,30개 decision tree 사용/seed33~62/mean validation f1 score 0.89097/hard voting/결측치 0으로 처리
+2024-02-12/00:52:24,ensemble_decisiontree_w_undersampling_and_ccp,0.7121752419765665,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/ccp_alpha 0.00045 사용/mean validation f1 score 0.8960/hard voting/결측치 0으로 처리/"
+2024-02-12/01:14:02,ensemble_decisiontree_w_undersampling_ccp_delFeature,0.7031170158405723,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/ccp_alpha 0.0004 사용/""customer_country.1"" feature 삭제/mean validation f1 score 0.89571/hard voting/결측치 0으로 처리/"
+2024-02-12/01:55:22,ensemble_decisiontree_w_undersampling_bestccpAlpha_delFeature,0.6965020576131687,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/모델마다 best ccp alpha 찾아서 적용/""customer_country.1"" feature 삭제/mean validation f1 score 0.90029/hard voting/결측치 0으로 처리/"
+2024-02-12/11:45:10,ensemble_decisiontree_w_undersampling_bestccpAlpha,0.6965020576131687,"30개 decision tree 사용, decision tree마다 seed 세팅/seed33~62/모델마다 best ccp alpha 찾아서 적용/mean validation f1 score 0.90029/hard voting/결측치 0으로 처리/"
+2024-02-13/23:27:34,randomForest_params01,0.7045092838196286,모든 feature 사용/전처리 X/RandomForestClassifier 사용/결측치는 0으로 채움/Seed 33/ensemble_decisiontree_w_undersampling_and_ccp 실험과 유사하게 param setting/
+2024-02-13/23:43:00,randomForest_params02,0.7172774869109947,randomForest_params01 실험에서 n_estimators를 100으로 증가
+2024-02-13/23:47:35,randomForest_params03,0.6288056206088994,"randomForest_params02 실험에서 max_features를 ""sqrt""로 변경"
+2024-02-13/23:52:17,randomForest_params04,0.7104446742502586,randomForest_params02 실험에서 ccp_alpha 값을 0.00005 만큼 높임
+2024-02-13/23:54:57,randomForest_params05,0.7178936055883933,randomForest_params02 실험에서 ccp_alpha 값을 0.00005 만큼 감소
+2024-02-17/18:30:43,params01_adaboost_10,0.5892063492063493,"params01 세팅의 adaboost를, undersampling을 통해 만든 서로 다른 10개의 subset에 대해 학습시킨 뒤, 최종 앙상블"
+2024-02-17/19:39:30,params01_adaboost_20,0.6070087609511889,"params01 세팅의 adaboost를, undersampling을 통해 만든 서로 다른 20개의 subset에 대해 학습시킨 뒤, 최종 앙상블"
+2024-02-18/22:04:47,randomForest_params05_cityAndCountry,0.6471251409244645,randomForest_params05 실험 + customer_country feature를 city와 country로 분리
+2024-02-21/14:45:37,randomForest_params05_delFeatures,0.6725248974809607,"randomForest_params05 세팅 + is_converted가 True인 데이터와 False인 데이터 간에 분포 차이가 많이 나지 않는 features를 모두 삭제하고, 7개만 사용"
+2024-02-21/14:52:03,randomForest_params06,0.6694166175604007,randomForest_params05_delFeatrues 세팅에서 ccp_alpha 값을 0.001 감소
+2024-02-21/22:52:54,randomForest_params05_logTransform,0.7178936055883933,randomForest_params05 실험에서 lead_desc_length feature에 log transformation 적용
+2024-02-22/23:14:07,hparams01_gbm_20,0.7048260381593714,random_state를 제외한 hparams을 default 값으로 사용한 gbm 20개를 학습시킨 뒤 ensemble
+2024-02-22/23:20:44,hparams02_gbm_20,0.6986754966887417,hparams01에서 ccp_alpha를 0.0004로 변경한 뒤 gbm 20개를 학습시키고 ensemble
+2024-02-22/23:34:11,hparams01_gbm_20_noSplit,0.7100392596747055,"Data split을 하지 않은 상태에서, hparams01 세팅으로 gbm 20개를 학습시키고 ensemble"
+2024-02-22/23:45:26,hparams01_gbm_100_noSplit,0.7043040804918949,"Data split을 하지 않은 상태에서, hparams01 세팅으로 gbm 100개를 학습시키고 ensemble"
+2024-02-23/00:25:20,hparams03_gbm_20_incMaxDepth,0.7265668330560177,"hparams01 세팅에서 max_depth를 6으로 증가시킨 뒤에, gbm 20개를 학습시키고 ensemble"
+2024-02-23/13:12:49,hparams04_gbm_20_inc_estimators,0.7309192200557103,"hparams03 세팅에서 n_estimators를 200으로 증가시킨 뒤에, gbm 20개를 학습시키고 ensemble"
+2024-02-23/13:58:11,hparams05_gbm_30_inc_estimators,0.7377680043980209,"hparams04 세팅에서 n_estimators를 400으로 증가시킨 뒤에, gbm 30개를 학습시키고 ensemble"
+2024-02-23/23:27:54,baseline_xgb,0.6789976133651552,xgboost baseline
+2024-02-23/23:34:51,baseline_xgb_decEta,0.6844741235392321,xgboost baseline에서 eta를 0.05로 줄임
+2024-02-24/00:12:24,hparams05_gbm_30_inc_estimators_dropDuplicates,0.7433920704845814,"hparams05 세팅 + 중복 데이터 (negative 3000개, positive 200개) 삭제"
+2024-02-24/21:05:02,hparams05_gbm_30_feCustomerCountry,0.7418463239358761,hparams05 세팅 + 중복 데이터 삭제 + customer_country feature 정규화 및 customer_country.1 feature 삭제
+2024-02-24/21:16:17,hparams05_gbm_30_delFeature,0.743421052631579,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제
+2024-02-24/21:36:19,hparams05_gbm_30_delFeature_feCustomerCountry,0.7512301804264626,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출
+2024-02-24/23:23:58,hparams05_gbm_30_binning,0.7546549835706462,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning
+2024-02-25/15:45:37,hparams05_gbm_30_regroupCustomerType,0.7532467532467532,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning + customer_type regroup
+2024-02-25/16:03:46,hparams05_gbm_30_logTransformation,0.7546549835706462,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1 feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning + historical_existing_cnt log transformation
+2024-02-25/16:25:47,hparams05_gbm_30_del2Features,0.7581699346405228,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1/id_strategic_ver/it_strategic_ver feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx binning
+2024-02-25/17:30:39,hparams05_gbm_30_incBinSize,0.7565502183406114,hparams05 세팅 + 중복 데이터 삭제 + customer_country.1/id_strategic_ver/it_strategic_ver feature 삭제 + customer_country에서 국가 정보만 추출 + customer_idx bin size를 1000으로 설정
+2024-02-26/00:42:11,hparams05_gbm_30_fe01,0.7546346782988005,feature engineering 01 + hparams05 세팅 + gbm 30개 앙상블
+2024-02-26/01:27:22,hparams05_gbm_30_fe02,0.7585831062670301,feature engineering 01 + bin size 500으로 증가 + regrouping + hparams05 세팅 + gbm 30개 앙상블
+2024-02-26/11:20:07,hparams05_gbm_30_fe02,0.7585831062670301,feature engineering 01 + bin size 500으로 증가 + regrouping + hparams05 세팅 + gbm 30개 앙상블
+2024-02-26/16:25:00,hparams05_gbm_30_final,0.755676,feature engineering + 30개 gbm ensemble
